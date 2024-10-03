@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  broker:
+    image: broker:latest
+    container_name: broker
+    networks:
+      - my-network
+
+  girlsallowed:
+    image: girlsallowed:latest
+    container_name: girlsallowed
+    networks:
+      - my-network
+    depends_on:
+      - broker
+
+  auldfellas:
+    image: auldfellas:latest
+    container_name: auldfellas
+    networks:
+      - my-network
+    depends_on:
+      - broker
+
+  dodgygeezers:
+    image: dodgygeezers:latest
+    container_name: dodgygeezers
+    networks:
+      - my-network
+    depends_on:
+      - broker
+
+  client:
+    image: client:latest
+    container_name: client
+    networks:
+      - my-network
+    depends_on:
+      - broker
+
+networks:
+  my-network:
+    driver: bridge
+    external: true
